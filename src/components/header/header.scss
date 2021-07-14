@@ -3,6 +3,7 @@
   height: 60px;
   padding: 0 48px;
   align-items: center;
+  background-color: #5fc076;
 }
 
 .create-event-btn {
@@ -26,5 +27,6 @@
 
   &__displayed-month {
     margin-left: 10px;
+    font-weight: 700;
   }
 }
