@@ -1,32 +1,66 @@
-import React, { Component } from 'react';
-
+import React, { useState, useEffect } from 'react';
+import moment from 'moment';
 import Navigation from './../navigation/Navigation';
 import Week from '../week/Week';
 import Sidebar from '../sidebar/Sidebar';
-import events from '../../gateway/events';
-
+import { getEvents, deleteEvents } from '../../gateway/events';
+import Modal from '../modal/Modal';
 import './calendar.scss';
+import PropTypes from 'prop-types';
 
-class Calendar extends Component {
-  state = {
-    events,
+const Calendar = ({ weekDates, modalWindow, statusModalWindow }) => {
+  const [events, setEvents] = useState([]);
+
+  const getEventsList = () => {
+    getEvents()
+      .then(events => {
+        const weekDate = weekDates.map(el => moment(el).format('MMMM DD YYYY'));
+        const newEvents = events.filter(({ dateFrom }) =>
+          weekDate.includes(moment(dateFrom).format('MMMM DD YYYY')),
+        );
+        return setEvents(newEvents);
+      })
+      .catch(error => alert(error.message));
   };
 
-  render() {
-    const { weekDates } = this.props;
+  const removeEventHandler = id => {
+    deleteEvents(id).then(() => getEventsList());
+  };
 
-    return (
-      <section className="calendar">
-        <Navigation weekDates={weekDates} />
-        <div className="calendar__body">
-          <div className="calendar__week-container">
-            <Sidebar />
-            <Week weekDates={weekDates} events={this.state.events} />
+  useEffect(() => {
+    getEventsList();
+  }, []);
+
+  const hours = Array(24)
+    .fill()
+    .map((val, index) => index);
+
+  return (
+    <section className="calendar">
+      <header className="calendar__header">
+        {weekDates.map(dayDate => (
+          <Navigation key={dayDate.getDay()} dayDate={dayDate} />
+        ))}
+      </header>
+      <div className="calendar__body">
+        <div className="calendar__week-container">
+          <div className="calendar__time-scale">
+            {hours.map(hour => (
+              <Sidebar key={hour} hour={hour} />
+            ))}
           </div>
+          <Week weekDates={weekDates} events={events} removeEventHandler={removeEventHandler} />
         </div>
-      </section>
-    );
-  }
-}
+      </div>
+      {statusModalWindow && <Modal modalWindow={modalWindow} getEventsList={getEventsList} />}
+    </section>
+  );
+};
+
+Calendar.propTypes = {
+  statusModalWindow: PropTypes.bool,
+  modalWindow: PropTypes.func.isRequired,
+  weekDates: PropTypes.array.isRequired,
+};
 
 export default Calendar;

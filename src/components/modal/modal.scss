@@ -36,6 +36,11 @@
     width: 24px;
     height: 24px;
     background: transparent;
+
+    &:hover {
+      background-color: lightgrey;
+      color: red;
+    }
   }
 }
 
@@ -57,5 +62,11 @@
     border: none;
     padding: 8px 16px;
     border-radius: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: green;
+      font-weight: 700;
+    }
   }
 }

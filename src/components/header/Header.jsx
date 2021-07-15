@@ -1,33 +1,44 @@
 import React from 'react';
-
 import moment from 'moment';
 import './header.scss';
+import PropTypes from 'prop-types';
 
-const Header = ({ weekDates, prevWeek, nextWeek, todayWeek }) => {
-  const currentMonth = moment(weekDates[0]).format('MMMM YYYY');
-  const nextMonth = moment(weekDates[weekDates.length - 1]).format('MMMM YYYY');
+const Header = ({ onNextWeek, onPrevWeek, onTodayWeek, weekDates, modalWindow }) => {
+  const firstDayWeekOfMonth = moment(weekDates[0]).format('MMMM YYYY');
+  const lastDayWeekOfMonth = moment(weekDates[weekDates.length - 1]).format('MMMM YYYY');
 
-  const textMonth = currentMonth === nextMonth ? currentMonth : `${currentMonth} - ${nextMonth}`;
+  const textMonth =
+    firstDayWeekOfMonth === lastDayWeekOfMonth
+      ? firstDayWeekOfMonth
+      : `${firstDayWeekOfMonth} - ${lastDayWeekOfMonth}`;
 
   return (
     <header className="header">
-      <button className="button create-event-btn">
+      <button className="button create-event-btn" onClick={modalWindow}>
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>
       <div className="navigation">
-        <button className="navigation__today-btn button" onClick={todayWeek}>
+        <button className="navigation__today-btn button" onClick={onTodayWeek}>
           Today
         </button>
-        <button className="icon-button navigation__nav-icon" onClick={prevWeek}>
+        <button className="icon-button navigation__nav-icon" onClick={onPrevWeek}>
           <i className="fas fa-chevron-left"></i>
         </button>
-        <button className="icon-button navigation__nav-icon" onClick={nextWeek}>
+        <button className="icon-button navigation__nav-icon" onClick={onNextWeek}>
           <i className="fas fa-chevron-right"></i>
         </button>
         <span className="navigation__displayed-month">{textMonth}</span>
       </div>
     </header>
   );
+};
+
+Header.propTypes = {
+  onNextWeek: PropTypes.func.isRequired,
+  onPrevWeek: PropTypes.func.isRequired,
+  onTodayWeek: PropTypes.func.isRequired,
+  weekDates: PropTypes.array.isRequired,
+  modalWindow: PropTypes.func.isRequired,
 };
 
 export default Header;
