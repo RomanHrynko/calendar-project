@@ -1,8 +1,6 @@
-# Layout Sample Project
+### A calendar that is designed to planning your time with the ability to add and delete tasks
 
-### https://romanhrynko.github.io/first-website/
-
-Layout supports mobile (up-to-400) and desktop (up-to-1360) versions
+### You can see the link [Calendar-project](https://condescending-edison-bc423b.netlify.app)
 
 ### The tech stack is:
 
@@ -11,8 +9,7 @@ Layout supports mobile (up-to-400) and desktop (up-to-1360) versions
 - [Flexbox](https://en.wikipedia.org/wiki/CSS_Flexible_Box_Layout)
 - [Sass (Scss)](https://sass-lang.com/)
 - [BEM methodology](https://en.bem.info/methodology/)
-- [React] (https://reactjs.org/)
-
+- [React](https://reactjs.org/)
 ### Author
 
 - Roman Hrynko
