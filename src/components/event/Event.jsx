@@ -29,7 +29,11 @@ const Event = ({ id, dateFrom, dateTo, title, removeEventHandler, description })
         <div className="event__description">{description}</div>
       </div>
       {eventStatus && (
-        <button style={styleButton} className="delete-event-btn" onClick={removeEventHandler}>
+        <button
+          style={styleButton}
+          className="delete-event-btn"
+          onClick={() => removeEventHandler(id)}
+        >
           <i className="fas fa-trash"></i>
           Delete
         </button>
