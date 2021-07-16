@@ -12,6 +12,7 @@ A calendar that is designed to planning your time with the ability to add and de
 - [Sass (Scss)](https://sass-lang.com/)
 - [BEM methodology](https://en.bem.info/methodology/)
 - [React](https://reactjs.org/)
+
 ### Author
 
 - Roman Hrynko
