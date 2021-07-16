@@ -8,6 +8,7 @@ const Event = ({ id, dateFrom, dateTo, title, removeEventHandler, description })
 
   const eventStart = `${dateFrom.getHours()}:${formatMins(dateFrom.getMinutes())}`;
   const eventEnd = `${dateTo.getHours()}:${formatMins(dateTo.getMinutes())}`;
+
   const height = (dateTo.getTime() - dateFrom.getTime()) / (1000 * 60);
   const marginTop = dateFrom.getMinutes();
 
@@ -28,11 +29,7 @@ const Event = ({ id, dateFrom, dateTo, title, removeEventHandler, description })
         <div className="event__description">{description}</div>
       </div>
       {eventStatus && (
-        <button
-          style={styleButton}
-          className="delete-event-btn"
-          onClick={() => removeEventHandler(id)}
-        >
+        <button style={styleButton} className="delete-event-btn" onClick={removeEventHandler}>
           <i className="fas fa-trash"></i>
           Delete
         </button>
