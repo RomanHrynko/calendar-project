@@ -1,4 +1,6 @@
-### A calendar that is designed to planning your time with the ability to add and delete tasks
+### Calendar
+
+A calendar that is designed to planning your time with the ability to add and delete tasks
 
 ### You can see the link [Calendar-project](https://condescending-edison-bc423b.netlify.app)
 
