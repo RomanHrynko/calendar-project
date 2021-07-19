@@ -8,7 +8,7 @@ import Modal from '../modal/Modal';
 import './calendar.scss';
 import PropTypes from 'prop-types';
 
-const Calendar = ({ weekDates, setModalWindow, statusModalWindow }) => {
+const Calendar = ({ weekDates, handleModalWindow, statusModalWindow }) => {
   const [events, setEvents] = useState([]);
 
   const getEventsList = () => {
@@ -45,14 +45,14 @@ const Calendar = ({ weekDates, setModalWindow, statusModalWindow }) => {
           <Week weekDates={weekDates} events={events} removeEventHandler={removeEventHandler} />
         </div>
       </div>
-      {statusModalWindow && <Modal modalWindow={setModalWindow} getEventsList={getEventsList} />}
+      {statusModalWindow && <Modal modalWindow={handleModalWindow} getEventsList={getEventsList} />}
     </section>
   );
 };
 
 Calendar.propTypes = {
   statusModalWindow: PropTypes.bool,
-  setModalWindow: PropTypes.func.isRequired,
+  handleModalWindow: PropTypes.func.isRequired,
   weekDates: PropTypes.array.isRequired,
 };
 

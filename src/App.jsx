@@ -25,11 +25,11 @@ const App = () => {
         onNextWeek={onNextWeek}
         onPrevWeek={onPrevWeek}
         onTodayWeek={onTodayWeek}
-        setModalWindow={modalWindow}
+        handleModalWindow={modalWindow}
       />
       <Calendar
         weekDates={weekDates}
-        setModalWindow={modalWindow}
+        handleModalWindow={modalWindow}
         statusModalWindow={statusModalWindow}
       />
     </>

@@ -3,7 +3,7 @@ import moment from 'moment';
 import './header.scss';
 import PropTypes from 'prop-types';
 
-const Header = ({ onNextWeek, onPrevWeek, onTodayWeek, weekDates, setModalWindow }) => {
+const Header = ({ onNextWeek, onPrevWeek, onTodayWeek, weekDates, handleModalWindow }) => {
   const firstDayWeekOfMonth = moment(weekDates[0]).format('MMMM YYYY');
   const lastDayWeekOfMonth = moment(weekDates[weekDates.length - 1]).format('MMMM YYYY');
 
@@ -14,7 +14,7 @@ const Header = ({ onNextWeek, onPrevWeek, onTodayWeek, weekDates, setModalWindow
 
   return (
     <header className="header">
-      <button className="button create-event-btn" onClick={setModalWindow}>
+      <button className="button create-event-btn" onClick={handleModalWindow}>
         <i className="fas fa-plus create-event-btn__icon"></i>Create
       </button>
       <div className="navigation">
@@ -38,7 +38,7 @@ Header.propTypes = {
   onPrevWeek: PropTypes.func.isRequired,
   onTodayWeek: PropTypes.func.isRequired,
   weekDates: PropTypes.array.isRequired,
-  setModalWindow: PropTypes.func.isRequired,
+  handleModalWindow: PropTypes.func.isRequired,
 };
 
 export default Header;
