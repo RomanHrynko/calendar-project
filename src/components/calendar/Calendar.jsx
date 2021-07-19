@@ -8,32 +8,28 @@ import Modal from '../modal/Modal';
 import './calendar.scss';
 import PropTypes from 'prop-types';
 
-const Calendar = ({ weekDates, modalWindow, statusModalWindow }) => {
+const Calendar = ({ weekDates, setModalWindow, statusModalWindow }) => {
   const [events, setEvents] = useState([]);
 
   const getEventsList = () => {
-    getEvents()
-      .then(events => {
-        const weekDate = weekDates.map(el => moment(el).format('MMMM DD YYYY'));
-        const newEvents = events.filter(({ dateFrom }) =>
-          weekDate.includes(moment(dateFrom).format('MMMM DD YYYY')),
-        );
-        return setEvents(newEvents);
-      })
-      .catch(error => alert(error.message));
+    getEvents().then(events => {
+      const weekDate = weekDates.map(el => moment(el).format('MMMM DD YYYY'));
+      const newEvents = events.filter(({ dateFrom }) =>
+        weekDate.includes(moment(dateFrom).format('MMMM DD YYYY')),
+      );
+      return setEvents(newEvents);
+    });
+    // .catch(error => alert(error.message));
   };
 
   const removeEventHandler = id => {
     deleteEvents(id).then(() => getEventsList());
+    // .catch(error => alert(error.message));
   };
 
   useEffect(() => {
     getEventsList();
   }, []);
-
-  const hours = Array(24)
-    .fill()
-    .map((val, index) => index);
 
   return (
     <section className="calendar">
@@ -44,22 +40,19 @@ const Calendar = ({ weekDates, modalWindow, statusModalWindow }) => {
       </header>
       <div className="calendar__body">
         <div className="calendar__week-container">
-          <div className="calendar__time-scale">
-            {hours.map(hour => (
-              <Sidebar key={hour} hour={hour} />
-            ))}
-          </div>
+          <Sidebar />
+
           <Week weekDates={weekDates} events={events} removeEventHandler={removeEventHandler} />
         </div>
       </div>
-      {statusModalWindow && <Modal modalWindow={modalWindow} getEventsList={getEventsList} />}
+      {statusModalWindow && <Modal modalWindow={setModalWindow} getEventsList={getEventsList} />}
     </section>
   );
 };
 
 Calendar.propTypes = {
   statusModalWindow: PropTypes.bool,
-  modalWindow: PropTypes.func.isRequired,
+  setModalWindow: PropTypes.func.isRequired,
   weekDates: PropTypes.array.isRequired,
 };
 

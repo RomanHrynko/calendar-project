@@ -1,20 +1,20 @@
 import React from 'react';
 import './sidebar.scss';
-import { formatMins } from '../../../src/utils/dateUtils.js';
-import PropTypes from 'prop-types';
 
-const Sidebar = ({ hour }) => {
-  const newHour = formatMins(hour);
+const Sidebar = () => {
+  const hours = Array(24)
+    .fill()
+    .map((val, index) => index);
 
   return (
-    <div className="time-slot">
-      <span className="time-slot__time">{`${newHour}:00`}</span>
+    <div className="calendar__time-scale">
+      {hours.map(hour => (
+        <div key={hour} className="time-slot">
+          <span className="time-slot__time">{`${hour}:00`}</span>
+        </div>
+      ))}
     </div>
   );
-};
-
-Sidebar.propTypes = {
-  hour: PropTypes.number.isRequired,
 };
 
 export default Sidebar;
